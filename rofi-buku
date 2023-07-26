@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function gen_bookmarks() {
+	cat < "$HOME/Dropbox/buku/bookmarks.json" | jq -r '.[] | "\(.index) \(.title) \(.tags)"'
+}
+
+BOOKMARK=$(gen_bookmarks | rofi -dmenu -i -no-show-icons -p "bookmarks")
+
+if [ -z "${BOOKMARK}" ]
+then
+	exit 0
+else
+	echo "${BOOKMARK}" | sed -e 's/ .*//' | xargs buku --nostdin -j -p | jq -r '.uri' | xargs xdg-open > /dev/null 2>&1
+fi
