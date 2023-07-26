@@ -15,3 +15,7 @@ $ cp rofi-buku ~/.local/bin
 $ rofi-buku
 ```
 * Make sure `~/.local/bin` is in your `$PATH`
+* You should generate the bookmarks as a json file using the following command
+```
+$ buku -j -p0 > bookmarks.json
+```
